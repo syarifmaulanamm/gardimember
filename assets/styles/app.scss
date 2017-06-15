@@ -1,0 +1,412 @@
+@import '../../node_modules/normalize.css/normalize.css';
+@import 'fonts';
+@import '../../node_modules/flexboxgrid/dist/flexboxgrid.min.css';
+
+/* Font */
+$font: muli, sans-serif;
+/* Color */
+$warning-color: #FFC729;
+$success-color: #45BF55;
+$danger-color: #BA1156;
+$light-color: white;
+$smooth-blue-color: #E1E6FA;
+$medium-blue-color: #75AED8;
+$light-blue-color: #00ADEE;
+$light-blue-hover-color: #029DCC;
+$purple-color: #4843D9;
+$dark-blue-color: #1D1340;
+$dark-color: #1F3340;
+
+@mixin shadow() {
+	box-shadow: 2px 2px 5px $dark-color;
+}
+
+body {
+	font-family: $font;
+}
+a, a:hover, a:focus, input:focus, select:focus, textarea:focus {
+	-webkit-user-select: none;  /* Chrome all / Safari all */
+	-moz-user-select: none;     /* Firefox all */
+	-ms-user-select: none;
+	outline:none;
+}
+
+
+/* Splashscreen */
+.splash-wrapper	{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 90;
+	animation: slideOutDown 2s 6s ease forwards;
+
+	.splash-logo {
+		position: absolute;
+		z-index: 91;
+		width: 50%;
+		top: 50%;
+		left: 50%;
+		margin-top: -25%;
+		margin-left: -25%;
+		/* Animation */
+		animation: scaleUp 2s ease forwards, scaleDown 2s 4s ease forwards;
+	}
+	
+	.splash-background {
+		position: absolute;
+		width: inherit;
+		height: inherit;
+		top: 0;
+		left: 0;
+		z-index: 90;
+		background-color: $dark-blue-color;
+		/* Animation */
+		animation: slideOutDown 2s 6s ease forwards;
+	}
+
+}
+
+/* Tabs */
+.layer {
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	overflow: hidden;
+
+	.layer-graphic {
+		position: absolute;
+		width: inherit;
+		height: inherit;
+		background-color: $smooth-blue-color;
+
+		img {
+			animation: slideInUp 2s 6s ease forwards;
+			width: 80%;
+			margin-top: 5%;
+			margin-left: 10%;
+		}
+	}
+
+	.tabs-wrapper {
+		position: fixed;
+		width: 100%;
+		height: 50%;
+		/*top:calc(50% - 44px);*/
+		bottom: 0px;
+		left: 0;
+		transition: height .4s ease;
+		overflow: hidden;
+		
+		.tabs-controller {
+			position: absolute;
+			top: 0px;
+			left: 8px;
+			width: 100%;
+			transform: translateX(100%);
+			animation: slideInLeft 2s 7s ease forwards;
+			z-index: 5;
+
+			a {
+				display: block;
+				text-decoration: none;
+				color: $dark-color;
+				font-weight: bold;
+				font-size: 16pt;
+				text-align: center;
+				padding: 10px 30px;
+			}
+
+			/*a.active {
+				border-bottom: 0px solid $purple-color;
+				animation: borderBottom 1s ease forwards;
+			}*/
+			.underline {
+				width: 50%;
+				height: 7px;
+				background-color: $purple-color;
+				transition: transform .4s ease;
+			}
+		}
+
+		.tabs-content {
+			.tab {
+				background-color: $dark-blue-color;
+				width: calc(100% - 40px);
+				padding: 40px 20px;
+				color: $light-color;
+				position: absolute;
+				top: 44px;
+				left: 0;
+				transform: translateX(100%);
+				transition: transform .4s ease;
+				overflow: hidden;
+				cursor: hand;
+				cursor: -moz-grab;
+				cursor: -webkit-grab;
+				cursor: grab;
+				box-shadow: -5px 0px 20px $dark-color;
+				/*opacity: 0;*/
+			}
+		}
+	}
+}
+
+/* Form */
+.form-group {
+	margin-bottom: 30px;
+
+	.input-group {
+		position: relative;
+		background-color: $light-color;
+		border-radius: 3px;
+		display: flex;
+		flex-direction: row;
+		
+		label {
+			position: absolute;
+			color: $dark-color;
+			font-size: 12pt;
+			font-weight: 300;
+			top: -25px;
+			left: 55px;
+			transform: translateY(37px);
+			opacity: 1;
+			transition: transform .4s linear;
+		}
+
+		.input-addon {
+			color: $dark-color;
+			padding: 10px;
+		}
+
+		input {
+			border: none;
+			flex: 1;
+			padding: 10px;
+			background-color: transparent;
+		}
+
+		input::placeholder {
+			font-style: italic;
+		}
+
+		input:focus ~ label, input:valid ~ label {
+			color: $light-color;
+			transform: translateY(0%);
+			opacity: 1;
+			font-size: 12px;
+		}
+
+		#show-password {
+			cursor: pointer;
+		}
+	}
+
+	.input-group.danger {
+		background-color: $danger-color;
+
+		label, .input-addon, input {
+			color: $light-color
+		}
+	}
+
+	/*Button*/
+	button {
+		display: block;
+		width: 100%;
+		background-color: $light-blue-color;
+		color: $light-color;
+		border:none;
+		text-align: center;
+		padding: 15px;
+		cursor: pointer;
+		border-radius: 3px;
+	}
+
+	button:hover {
+		background-color: $light-blue-hover-color;
+	}
+
+	.btn-link {
+		color: $light-blue-color;
+		text-align: center;
+		text-decoration: none;
+		display: block;
+		font-size: 12px;
+	}
+}
+
+.form-group.last {
+	margin-bottom: 0px;
+}
+
+/*Main*/
+.main {
+	position: fixed;
+	background-color: $smooth-blue-color;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+
+	header {
+		width: 100%;
+		background-color: $dark-blue-color;
+		margin: 0;
+		animation: slideInDown 2s ease;
+
+		.top-menu {
+
+			.brand {
+				margin: 20px;
+				color: $light-color;
+				font-size: 16pt;
+			}
+
+			.nav {
+				margin-right: 10px;
+				text-align: right;
+
+				a {
+					display: inline-block;
+					padding: 20px 10px;
+				}
+				#nav-notification {
+					color: $warning-color;
+				}
+				#nav-settings {
+					color: $light-color;
+				}
+			}
+		}
+
+		.tabs-controller {
+			position: relative;
+			text-align: center;
+
+			ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+
+				li {
+					display: inline-block;
+					animation: scaleUp 1s ease forwards;
+					opacity: 0;
+
+					a {
+						padding: 20px 32px;
+						text-decoration: none;
+						color: $medium-blue-color;
+						text-align: center;
+
+						i {
+							display: block;
+							font-size: 26pt;
+						}
+						span {
+							display: block;
+							font-size: 8pt;
+						}
+					}
+
+					a::after {
+					    content: '';
+					    display: block;
+					    width: 100%;
+					    height: 0px;
+					    background: $purple-color;
+						position: absolute;
+						bottom: -5px;
+					    transition: all .2s;
+					}
+
+					a.active::after, a:hover::after {
+						bottom: -9px;
+						height: 5px;
+					}
+				}
+
+				li:nth-child(2) {animation-delay: .5s}
+				li:nth-child(3) {animation-delay: 1s}
+				li:nth-child(4) {animation-delay: 1.5s}
+				li:nth-child(5) {animation-delay: 2s}
+			}
+		}
+	}
+}
+
+/* Scroll */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+/* Animation */
+.animate {transition: transform 0.3s ease-out; }
+@keyframes scaleUp {
+	0% {opacity: 0; transform: scale(0);}
+	90% {opacity: 1; transform: scale(1);}
+	100% {opacity: 1; transform: scale(0.9);}
+}
+
+@keyframes scaleDown {
+	0% {opacity: 1; transform: scale(0.9);}
+	90% {opacity: 1; transform: scale(1);}
+	100% {opacity: 0; transform: scale(0);}
+}
+
+@keyframes slideOutDown {
+	0% {transform: translateY(0%);}
+	100% {transform: translateY(100%);}
+}
+
+@keyframes slideInUp {
+	0% {transform: translateY(100%);opacity: 0;}
+	100% {transform: translateY(0%);opacity: 1;}
+}
+
+@keyframes slideInDown {
+	0% {transform: translateY(-100%);opacity: 0;}
+	100% {transform: translateY(0%);opacity: 1;}
+}
+
+@keyframes slideInLeft {
+	0% {transform: translateX(100%);opacity: 0;}
+	100% {transform: translateX(0%);opacity: 1;}
+}
+
+@keyframes borderBottom {
+	0% {border-width: 0px;opacity: 0;}
+	100% {border-width: 5px;opacity: 1;}
+}
